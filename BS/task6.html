@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        .input-group input.error-border, .input-group select.error-border {
+            border-color: red;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="myForm">
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+                <div class="error" id="nameError"></div>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+                <div class="error" id="emailError"></div>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <div class="error" id="passwordError"></div>
+            </div>
+            <div class="input-group">
+                <label for="hobbies">Hobbies</label>
+                <select id="hobbies" name="hobbies">
+                    <option value="">Select a hobby</option>
+                    <option value="Reading">Reading</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Music">Music</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let isValid = true;
+
+            let name = document.getElementById("name");
+            let email = document.getElementById("email");
+            let password = document.getElementById("password");
+
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+            name.classList.remove("error-border");
+            email.classList.remove("error-border");
+            password.classList.remove("error-border");
+
+            if (name.value.trim() === "") {
+                document.getElementById("nameError").textContent = "Name is required";
+                name.classList.add("error-border");
+                isValid = false;
+            }
+            if (email.value.trim() === "") {
+                document.getElementById("emailError").textContent = "Email is required";
+                email.classList.add("error-border");
+                isValid = false;
+            }
+            if (password.value.trim() === "") {
+                document.getElementById("passwordError").textContent = "Password is required";
+                password.classList.add("error-border");
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Form submitted successfully!");
+            }
+        });
+    </script>
+</body>
+</html>
